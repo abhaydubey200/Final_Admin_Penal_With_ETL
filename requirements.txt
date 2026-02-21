@@ -2,3 +2,8 @@ streamlit
 snowflake-snowpark-python
 pandas
 plotly
+pyodbc
+mysql-connector-python
+snowflake-connector-python
+pandas 
+openpyxl
