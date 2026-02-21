@@ -8,9 +8,7 @@ import socket
 
 st.title("🔄 Enterprise Multi-Source ETL Console")
 
-# ==========================================================
 # SESSION CHECK
-# ==========================================================
 if "user_info" not in st.session_state:
     st.error("Session expired.")
     st.stop()
@@ -21,9 +19,6 @@ if not user_info.get("CAN_EDIT_USERS"):
     st.error("Access Denied.")
     st.stop()
 
-# ==========================================================
-# SNOWFLAKE CONNECTION
-# ==========================================================
 def get_sf_connection():
     return snowflake.connector.connect(
         user=st.secrets["snowflake"]["user"],
@@ -36,18 +31,12 @@ def get_sf_connection():
 sf_conn = get_sf_connection()
 sf_cursor = sf_conn.cursor()
 
-# ==========================================================
-# TABS
-# ==========================================================
 tab1, tab2, tab3 = st.tabs([
     "🔁 Snowflake → Snowflake",
     "📁 File Upload",
     "🌐 External DB → Snowflake"
 ])
 
-# ==========================================================
-# TAB 1 - SNOWFLAKE TO SNOWFLAKE
-# ==========================================================
 with tab1:
 
     st.subheader("Snowflake Internal ETL")
@@ -90,9 +79,6 @@ with tab1:
         except Exception as e:
             st.error(f"Error: {e}")
 
-# ==========================================================
-# TAB 2 - FILE UPLOAD
-# ==========================================================
 with tab2:
 
     st.subheader("Upload CSV / Excel")
@@ -141,9 +127,6 @@ with tab2:
             except Exception as e:
                 st.error(f"Upload Failed: {e}")
 
-# ==========================================================
-# TAB 3 - EXTERNAL DATABASE ETL
-# ==========================================================
 with tab3:
 
     st.subheader("External Database → Snowflake")
